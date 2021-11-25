@@ -4,30 +4,17 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function Character(props) {
   // character fetch
-  const charFetch = () => {
-    fetch(`https://rickandmortyapi.com/api/character/?name=${props.inputString}`)
-  .then(response => {
-    if (!response.ok) {
-      throw Error('De server ligt er momenteel uit');}
-      ;
-      return response.json();
-  })
-  .then(data => {
-    const results = data.results;
-    let items = [];
 
-      items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender})
-    
-    console.log(items)})
-    .catch((err) => console.log(err))
-  }
 
     return (
         <div className="App">
-          <header className="App-header">
+       <header className="App-header">
+        <h1>Rick and Morty X Mobiel.nl</h1>
+      </header>
+      <p>Zoek jouw favoriete aflevering op basis van naam of afleveringcode</p>
             <div style={{ width: 400 }}>
               <ReactSearchAutocomplete
-                items={props.character}
+                items={props.characters}
                 onSearch={props.handleOnSearch}
                 onHover={props.handleOnHover}
                 onSelect={props.handleOnSelect}
@@ -38,8 +25,10 @@ function Character(props) {
                 resultStringKeyName="name"
               />
             </div>
-          </header>
-          <button onClick={charFetch} className="homeIntro">
+
+          {/* delete input in veld? */}
+
+          <button onClick={props.charFetch} className="homeIntro">
             home
           </button>
         </div>

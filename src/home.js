@@ -6,24 +6,18 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <Link to="/episodes">
-          <button className="homeIntro">
-            home
+          <button className="homeButton">
+            episodes
           </button>
-        </Link>
+          </Link>
+          <Link to="/characters">
+          <button className="homeButton">
+            characters
+          </button>
+          </Link>
     </div>
   );
 }

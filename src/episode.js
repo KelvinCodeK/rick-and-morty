@@ -4,29 +4,17 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function Episode(props) {
     // episode fetch
-    const epiFetch = () => {
-      fetch(`https://rickandmortyapi.com/api/episode/?name=${props.inputString}`)
-    .then(response => {
-      if (!response.ok) {
-        throw Error('De server ligt er momenteel uit');}
-        ;
-        return response.json();
-    })
-    .then(data => {
-      const results = data.results;
-      let items = [];
-        items.push({id: results[0].id, name: results[0].name, episode: results[0].episode, air_date: results[0].air_date, characters: results[0].characters })
-      console.log(items)})
-      .catch((err) => console.log(err))
-     
-    }
+
 
 return (
   <div className="App">
-    <header className="App-header">
+      <header className="App-header">
+        <h1>Rick and Morty X Mobiel.nl</h1>
+      </header>
+      <p>Zoek jouw favoriete karakter</p>
       <div style={{ width: 400 }}>
         <ReactSearchAutocomplete
-          items={props.episode}
+          items={props.episodes}
           onSearch={props.handleOnSearch}
           onHover={props.handleOnHover}
           onSelect={props.handleOnSelect}
@@ -37,10 +25,13 @@ return (
           resultStringKeyName="name"
         />
       </div>
-    </header>
-    <button onClick={epiFetch} className="homeIntro">
+
+
+    <button onClick={props.epiFetch} className="homeIntro">
             home
           </button>
+          {props.episode[0] ?  <p>Hoi {props.episode[0].name}</p> : null }
+          
   </div>
 );
 }

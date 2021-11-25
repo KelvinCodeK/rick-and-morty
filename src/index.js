@@ -21,6 +21,8 @@ import {
 
 export default function Index() {
 
+  const [episodes, setEpisodes] = useState([]);
+  const [characters, setCharacters] = useState([]);
   const [episode, setEpisode] = useState([]);
   const [character, setCharacter] = useState([]);
   const [inputString, setInputString] = useState('');
@@ -41,7 +43,7 @@ export default function Index() {
       for(x in results) {
         items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })
       }
-      setEpisode([...items]);})
+      setEpisodes([...items]);})
       .catch((err) => console.log(err))
     
      // character autocomplete fetch
@@ -59,7 +61,7 @@ export default function Index() {
         for(x in results) {
           items.push({id: results[x].id, name: results[x].name})
         }
-        setCharacter([...items]);})
+        setCharacters([...items]);})
         .catch((err) => console.log(err))
     
     }, []);
@@ -88,6 +90,46 @@ export default function Index() {
       return item
     }
 
+    //charfetch
+
+    const charFetch = () => {
+      fetch(`https://rickandmortyapi.com/api/character/?name=${inputString}`)
+    .then(response => {
+      if (!response.ok) {
+        throw Error('De server ligt er momenteel uit');}
+        ;
+        return response.json();
+    })
+    .then(data => {
+      const results = data.results;
+      let items = [];
+  
+        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origina: results[0].origin.name, image: results[0].image})
+        setCharacter([...items])
+      console.log(items)})
+      .catch((err) => console.log(err))
+    }
+
+    //epifetch
+
+    const epiFetch = () => {
+      fetch(`https://rickandmortyapi.com/api/episode/?name=${inputString}`)
+    .then(response => {
+      if (!response.ok) {
+        throw Error('De server ligt er momenteel uit');}
+        ;
+        return response.json();
+    })
+    .then(data => {
+      const results = data.results;
+      let items = [];
+        items.push({id: results[0].id, name: results[0].name, episode: results[0].episode, air_date: results[0].air_date, characters: results[0].characters });
+        setEpisode([...items]);
+      console.log(items)})
+      .catch((err) => console.log(err))
+     
+    }
+
   return (
     <Router>
       <div>
@@ -95,8 +137,9 @@ export default function Index() {
       <Route 
       path="/episodes" 
       element={<Episode 
-      inputString={inputString}
-      episode={episode} 
+        epiFetch={epiFetch}
+      episodes={episodes} 
+      episode={episode}
       handleOnSearch={handleOnSearch} 
       handleOnHover={handleOnHover} 
       handleOnSelect={handleOnSelect} 
@@ -106,8 +149,9 @@ export default function Index() {
       <Route 
       path="/characters" 
       element={<Character 
-      inputString={inputString}
-      character={character} 
+        charFetch={charFetch}
+      characters={characters} 
+      character={character}
       handleOnSearch={handleOnSearch} 
       handleOnHover={handleOnHover} 
       handleOnSelect={handleOnSelect} 
