@@ -60,3 +60,29 @@ header {
   border: 2px solid #d8d5d5;
   cursor: pointer;
 }
+
+.portalRick {
+  display:flex;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+  position: relative;
+}
+
+.portal {
+  height: calc(40px + 40vmin);
+  width: calc(25px + 25vmin);
+  position: absolute;
+ right: 0.5em;
+ z-index: 1;
+ border-radius: 60%;
+}
+
+.rick {
+  height: calc(40px + 40vmin);
+  width: calc(25px + 25vmin);
+  position: absolute;
+  right: 5em;
+}
+
+

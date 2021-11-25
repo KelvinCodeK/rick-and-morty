@@ -4,3 +4,41 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.charEpisodes {
+    max-height: 10em;
+    list-style: none;
+    background-color: white;
+    border: 1px solid grey;
+    color: black;
+    overflow: scroll;
+    scrollbar-color: black;
+    box-sizing:border-box;
+    width: calc(30px + 30vmin);
+}
+
+.resultaatRij{
+    align-items: center;
+}
+
+.resultaatRij > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+li {
+    font-weight: bold;
+}
+
+.charImage {
+    border-radius: 10%;
+    box-shadow: white 0px 0.3em 0.5em;
+    height: calc(30px + 30vmin);
+    width: calc(30px + 30vmin);
+}
+
+@media only screen and (max-width: 1000px) {
+    .resultaatRij {
+        flex-direction: column;
+    }
+}

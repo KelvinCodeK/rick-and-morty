@@ -6,15 +6,18 @@ function Character(props) {
   // character fetch
 
 
+
+    
+
     return (
         <main className="zoekPagina">
        <header>
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <section className="zoekEpisode">
-      <p>Find your favorite character</p>
+      <h2>Find your favorite character</h2>
       <div className="zoeken">
-            <div style={{ width: 400 }}>
+            <div style={{ width: 'calc(20px + 35vmin)' }}>
               <ReactSearchAutocomplete
                 items={props.characters}
                 onSearch={props.handleOnSearch}
@@ -41,21 +44,36 @@ function Character(props) {
      (
       <div className="resultaatRij">
       <div>
-      <h2>{props.character[0].name}</h2>   
+      <h3>{props.character[0].name}</h3>   
       <ul>
       <li>gender: {props.character[0].gender}</li>
       <li>species: {props.character[0].species}</li>
       <li>origin: {props.character[0].origin}</li>
       </ul>
+      <p>{`${props.character[0].name} starred in these episodes:`}</p>
+      <ul className="charEpisodes">
+{props.character[0].episode.map((x) => {
+        
+        let link = x;
+        let regexLink = x.replace('https://rickandmortyapi.com/api/', '');
+        let finalLink = regexLink.replace('/', ' ');
+                      return (
+        
+                        <li key={`${finalLink + 3}`}>
+                          { finalLink}
+                        </li>
+        
+                      )
+                  })}
+      </ul>
+      
+
+    
       </div>
-      <img src={props.character[0].image} />
+      <img className="charImage" src={props.character[0].image} />
 
       </div>
     )
-  
-
-
-  
   : null}
 </section>
 

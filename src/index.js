@@ -106,8 +106,9 @@ export default function Index() {
       const results = data.results;
       let items = [];
   
-        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origin: results[0].origin.name, image: results[0].image})
-        setCharacter([...items])
+        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origin: results[0].origin.name, image: results[0].image, episode: results[0].episode})
+        setCharacter([...items]);
+        document.querySelector('input').value = '';
       console.log(items)})
       .catch((err) => console.log(err))
     }
@@ -127,6 +128,7 @@ export default function Index() {
       let items = [];
         items.push({id: results[0].id, name: results[0].name, episode: results[0].episode, air_date: results[0].air_date, characters: results[0].characters });
         setEpisode([...items]);
+        document.querySelector('input').value = '';
       console.log(items)})
       .catch((err) => console.log(err))
      

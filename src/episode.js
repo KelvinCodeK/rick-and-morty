@@ -12,7 +12,7 @@ return (
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <section className="zoekEpisode">
-      <p>Find your favorite episode, based on its name or episode code</p>
+      <h2>Find your favorite episode, based on its name or episode code</h2>
       <div className="zoeken">
       <div style={{ width: 'calc(20px + 35vmin)' }}>
         <ReactSearchAutocomplete
@@ -41,7 +41,7 @@ return (
   {props.episode[0] ? 
      (
       <div>
-      <h2>{props.episode[0].name}</h2>   
+      <h3>{props.episode[0].name}</h3>   
       <p>Episode code: {props.episode[0].episode}</p>
       <p>This episode was first aired on: {props.episode[0].air_date}</p>
       </div>
