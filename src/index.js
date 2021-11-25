@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import Home from './home';
-//  GEWOON fetch aan de hand van de string
+import Episode from './episode';
+import Character from './character';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+
+//  gewoon fetch aan de hand van de string
 // afbeelding van een portal, waar rick n morty met een opacity uit komen gelopen
 // gebruik veel van de groene portal kleur. ook met neon effect uit YT vid
 // perspective op de portal en laat hem gloeien wanneer rick er uit komt (border left)
 // homepage 2 containers, van flex row naar flex column op mobiel
 // alle afleveringen waarin een karakter speelt onder / naast het karakter mappen
+// filter op naam van epi en char om de data met een query te ontvangen?
+// 2 paginas, vanuit allebei kan je zoeken. zet op die pagina zelf een knop die obv de state string een fetch doet.
 
 export default function Index() {
 
-  // alleen een state voor de string. niet voor de objecten
-
-  const epi = [];
   const [episode, setEpisode] = useState([]);
-  
-  const [episodeString, setEpisodeString] = useState('');
+  const [character, setCharacter] = useState([]);
+  const [inputString, setInputString] = useState('');
 
   useEffect(() => {
+    // episode autocomplete fetch
     fetch('https://rickandmortyapi.com/api/episode')
     .then(response => {
       if (!response.ok) {
@@ -34,12 +41,31 @@ export default function Index() {
       for(x in results) {
         items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })
       }
-      setEpisode([...items]);
-    console.log(episode)}
-    ).catch((err) => alert(err))}, []);
+      setEpisode([...items]);})
+      .catch((err) => alert(err))
+    
+     // character autocomplete fetch
+      fetch('https://rickandmortyapi.com/api/character')
+      .then(response => {
+        if (!response.ok) {
+          throw Error('De server ligt er momenteel uit, hier wordt aan gewerkt.');}
+          ;
+          return response.json();
+      })
+      .then(data => {
+        const results = data.results;
+        let items = [];
+        let x;
+        for(x in results) {
+          items.push({id: results[x].id, name: results[x].name})
+        }
+        setCharacter([...items]);})
+        .catch((err) => alert(err))
+    
+    }, []);
 
     const handleOnSearch = (string, results) => {
-      setEpisodeString(string);
+      setInputString(string);
       console.log(string, results)
     }
   
@@ -48,7 +74,7 @@ export default function Index() {
     }
   
     const handleOnSelect = (item) => {
-      setEpisodeString(item.name);
+      setInputString(item.name);
       console.log(item)
     }
   
@@ -61,25 +87,35 @@ export default function Index() {
     }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div style={{ width: 400 }}>
-          <ReactSearchAutocomplete
-            items={episode}
-            onSearch={handleOnSearch}
-            onHover={handleOnHover}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-            formatResult={formatResult}
-            fuseOptions={{ keys: ["name", "episode"], threshold: 0.1}}
-            resultStringKeyName="name"
-          />
-        </div>
-      </header>
-    </div>
+    <Router>
+      <div>
+      <Routes>
+      <Route path="/episodes" element={<Episode 
+      inputString={inputString}
+      episode={episode} 
+      handleOnSearch={handleOnSearch} 
+      handleOnHover={handleOnHover} 
+      handleOnSelect={handleOnSelect} 
+      handleOnFocus={handleOnFocus} 
+      formatResult={formatResult}/>} />
+
+      <Route path="/characters" element={<Character 
+      inputString={inputString}
+      character={character} 
+      handleOnSearch={handleOnSearch} 
+      handleOnHover={handleOnHover} 
+      handleOnSelect={handleOnSelect} 
+      handleOnFocus={handleOnFocus} 
+      formatResult={formatResult}/>} />
+      
+      <Route exact path="/" element={<Home />} />
+        
+
+      </Routes>
+      </div>
+    </Router>
   );
-}
+}//
 
 ReactDOM.render(
   <React.StrictMode>

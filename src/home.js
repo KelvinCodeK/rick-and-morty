@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './home.css';
+import {Link} from "react-router-dom";
 
 function Home() {
   return (
@@ -18,6 +19,11 @@ function Home() {
           Learn React
         </a>
       </header>
+      <Link to="/episodes">
+          <button className="homeIntro">
+            home
+          </button>
+        </Link>
     </div>
   );
 }
