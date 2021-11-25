@@ -8,13 +8,13 @@ function Episode(props) {
 
 return (
   <main className="zoekPagina">
-      <header>
+      <header className="episodeHeader">
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <section className="zoekEpisode">
       <h2>Find your favorite episode, based on its name or episode code</h2>
       <div className="zoeken">
-      <div style={{ width: 'calc(20px + 35vmin)' }}>
+      <div style={{ width: 'calc(70px + 25vmin)' }}>
         <ReactSearchAutocomplete
           items={props.episodes}
           onSearch={props.handleOnSearch}
@@ -27,7 +27,7 @@ return (
           resultStringKeyName="name"
         />
       </div>
-      <button onClick={props.epiFetch} className="homeIntro">
+      <button onClick={props.epiFetch} className="button">
             search
           </button>
       </div>
@@ -37,7 +37,7 @@ return (
           
 
       </section>
-<section className="resultaat">
+<section className="resultaatEpisodes">
   {props.episode[0] ? 
      (
       <div>

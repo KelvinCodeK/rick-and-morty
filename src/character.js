@@ -11,13 +11,13 @@ function Character(props) {
 
     return (
         <main className="zoekPagina">
-       <header>
+       <header className="bannerCharacter">
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <section className="zoekEpisode">
       <h2>Find your favorite character</h2>
       <div className="zoeken">
-            <div style={{ width: 'calc(20px + 35vmin)' }}>
+            <div style={{ width: 'calc(70px + 25vmin)' }}>
               <ReactSearchAutocomplete
                 items={props.characters}
                 onSearch={props.handleOnSearch}
@@ -33,7 +33,7 @@ function Character(props) {
 
           {/* delete input in veld? */}
 
-          <button onClick={props.charFetch} className="homeIntro">
+          <button onClick={props.charFetch} className="button">
           search
           </button>
           </div>

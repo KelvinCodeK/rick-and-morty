@@ -68,6 +68,14 @@ export default function Index() {
     
     }, []);
 
+    // reset all
+
+    const resetAll = () => {
+      setEpisode([]);
+      setCharacter([]);
+      setInputString('');
+    }
+
     // autocomplete handlers
 
     const handleOnSearch = (string, results) => {
@@ -162,7 +170,10 @@ export default function Index() {
       handleOnFocus={handleOnFocus} 
       formatResult={formatResult}/>} />
       
-      <Route exact path="/" element={<Home />} />
+      <Route exact path="/" element={
+      <Home 
+      resetAll={resetAll}
+      />} />
         
       </Routes>
       </div>
