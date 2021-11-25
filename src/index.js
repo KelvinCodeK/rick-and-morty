@@ -30,7 +30,7 @@ export default function Index() {
     fetch('https://rickandmortyapi.com/api/episode')
     .then(response => {
       if (!response.ok) {
-        throw Error('De server ligt er momenteel uit, hier wordt aan gewerkt.');}
+        throw Error('De server ligt er momenteel uit');}
         ;
         return response.json();
     })
@@ -42,13 +42,13 @@ export default function Index() {
         items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })
       }
       setEpisode([...items]);})
-      .catch((err) => alert(err))
+      .catch((err) => console.log(err))
     
      // character autocomplete fetch
       fetch('https://rickandmortyapi.com/api/character')
       .then(response => {
         if (!response.ok) {
-          throw Error('De server ligt er momenteel uit, hier wordt aan gewerkt.');}
+          throw Error('De server ligt er momenteel uit');}
           ;
           return response.json();
       })
@@ -60,9 +60,11 @@ export default function Index() {
           items.push({id: results[x].id, name: results[x].name})
         }
         setCharacter([...items]);})
-        .catch((err) => alert(err))
+        .catch((err) => console.log(err))
     
     }, []);
+
+    // autocomplete handlers
 
     const handleOnSearch = (string, results) => {
       setInputString(string);
@@ -90,7 +92,9 @@ export default function Index() {
     <Router>
       <div>
       <Routes>
-      <Route path="/episodes" element={<Episode 
+      <Route 
+      path="/episodes" 
+      element={<Episode 
       inputString={inputString}
       episode={episode} 
       handleOnSearch={handleOnSearch} 
@@ -99,7 +103,9 @@ export default function Index() {
       handleOnFocus={handleOnFocus} 
       formatResult={formatResult}/>} />
 
-      <Route path="/characters" element={<Character 
+      <Route 
+      path="/characters" 
+      element={<Character 
       inputString={inputString}
       character={character} 
       handleOnSearch={handleOnSearch} 
@@ -110,7 +116,6 @@ export default function Index() {
       
       <Route exact path="/" element={<Home />} />
         
-
       </Routes>
       </div>
     </Router>
