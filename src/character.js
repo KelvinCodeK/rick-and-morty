@@ -12,7 +12,8 @@ function Character(props) {
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
       <section className="zoekEpisode">
-      <p>Zoek jouw favoriete karakter</p>
+      <p>Find your favorite character</p>
+      <div className="zoeken">
             <div style={{ width: 400 }}>
               <ReactSearchAutocomplete
                 items={props.characters}
@@ -32,11 +33,13 @@ function Character(props) {
           <button onClick={props.charFetch} className="homeIntro">
           search
           </button>
+          </div>
           </section>
 
           <section className="resultaat">
           {props.character[0] ? 
      (
+      <div className="resultaatRij">
       <div>
       <h2>{props.character[0].name}</h2>   
       <ul>
@@ -44,7 +47,8 @@ function Character(props) {
       <li>species: {props.character[0].species}</li>
       <li>origin: {props.character[0].origin}</li>
       </ul>
-
+      </div>
+      <img src={props.character[0].image} />
 
       </div>
     )
