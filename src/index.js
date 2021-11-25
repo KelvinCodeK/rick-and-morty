@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import App from './App';
+import Home from './home';
+//  GEWOON fetch aan de hand van de string
 // afbeelding van een portal, waar rick n morty met een opacity uit komen gelopen
+// gebruik veel van de groene portal kleur. ook met neon effect uit YT vid
+// perspective op de portal en laat hem gloeien wanneer rick er uit komt (border left)
+// homepage 2 containers, van flex row naar flex column op mobiel
+// alle afleveringen waarin een karakter speelt onder / naast het karakter mappen
 
 export default function Index() {
 
+  // alleen een state voor de string. niet voor de objecten
+
+  const epi = [];
   const [episode, setEpisode] = useState([]);
   
   const [episodeString, setEpisodeString] = useState('');
