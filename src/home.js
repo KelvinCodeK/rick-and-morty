@@ -4,10 +4,11 @@ import {Link} from "react-router-dom";
 
 function Home() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <main className="home">
+      <header>
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
+      <section className="buttons">
       <Link to="/episodes">
           <button className="homeButton">
             episodes
@@ -18,7 +19,13 @@ function Home() {
             characters
           </button>
           </Link>
+      </section>
+<section className="animations">
+    <div>
+      <img />
     </div>
+</section>
+    </main>
   );
 }
 

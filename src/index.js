@@ -10,6 +10,8 @@ import {
   Route
 } from "react-router-dom";
 
+// alles in het Engels, i.v.m engelse terukoppeling
+
 //  gewoon fetch aan de hand van de string
 // afbeelding van een portal, waar rick n morty met een opacity uit komen gelopen
 // gebruik veel van de groene portal kleur. ook met neon effect uit YT vid
@@ -104,7 +106,7 @@ export default function Index() {
       const results = data.results;
       let items = [];
   
-        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origina: results[0].origin.name, image: results[0].image})
+        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origin: results[0].origin.name, image: results[0].image})
         setCharacter([...items])
       console.log(items)})
       .catch((err) => console.log(err))

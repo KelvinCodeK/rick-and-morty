@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './home.css';
+import './character.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function Character(props) {
@@ -7,11 +7,12 @@ function Character(props) {
 
 
     return (
-        <div className="App">
-       <header className="App-header">
+        <main className="zoekPagina">
+       <header>
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
-      <p>Zoek jouw favoriete aflevering op basis van naam of afleveringcode</p>
+      <section className="zoekEpisode">
+      <p>Zoek jouw favoriete karakter</p>
             <div style={{ width: 400 }}>
               <ReactSearchAutocomplete
                 items={props.characters}
@@ -29,9 +30,32 @@ function Character(props) {
           {/* delete input in veld? */}
 
           <button onClick={props.charFetch} className="homeIntro">
-            home
+          search
           </button>
-        </div>
+          </section>
+
+          <section className="resultaat">
+          {props.character[0] ? 
+     (
+      <div>
+      <h2>{props.character[0].name}</h2>   
+      <ul>
+      <li>gender: {props.character[0].gender}</li>
+      <li>species: {props.character[0].species}</li>
+      <li>origin: {props.character[0].origin}</li>
+      </ul>
+
+
+      </div>
+    )
+  
+
+
+  
+  : null}
+</section>
+
+        </main>
       );
       }
 

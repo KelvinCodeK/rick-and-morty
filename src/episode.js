@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './home.css';
+import './episode.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
 function Episode(props) {
@@ -7,11 +7,13 @@ function Episode(props) {
 
 
 return (
-  <div className="App">
-      <header className="App-header">
+  <main className="zoekPagina">
+      <header>
         <h1>Rick and Morty X Mobiel.nl</h1>
       </header>
-      <p>Zoek jouw favoriete karakter</p>
+      <section className="zoekEpisode">
+      <p>Zoek jouw favoriete aflevering op basis van naam of afleveringcode</p>
+      <div className="zoeken">
       <div style={{ width: 400 }}>
         <ReactSearchAutocomplete
           items={props.episodes}
@@ -25,14 +27,33 @@ return (
           resultStringKeyName="name"
         />
       </div>
-
-
-    <button onClick={props.epiFetch} className="homeIntro">
-            home
+      <button onClick={props.epiFetch} className="homeIntro">
+            search
           </button>
-          {props.episode[0] ?  <p>Hoi {props.episode[0].name}</p> : null }
+      </div>
+
+
+
           
-  </div>
+
+      </section>
+<section className="resultaat">
+  {props.episode[0] ? 
+     (
+      <div>
+      <h2>{props.episode[0].name}</h2>   
+      <p>Episode code: {props.episode[0].episode}</p>
+      <p>This episode was first aired on: {new Date(props.episode[0].air_date).toLocaleString().split(' ')[0]}</p>
+      </div>
+    )
+  
+
+
+  
+  : null}
+</section>
+          
+  </main>
 );
 }
 
