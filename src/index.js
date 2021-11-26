@@ -10,17 +10,6 @@ import {
   Route
 } from "react-router-dom";
 
-// alles in het Engels, i.v.m engelse terukoppeling
-
-//  gewoon fetch aan de hand van de string
-// afbeelding van een portal, waar rick n morty met een opacity uit komen gelopen
-// gebruik veel van de groene portal kleur. ook met neon effect uit YT vid
-// perspective op de portal en laat hem gloeien wanneer rick er uit komt (border left)
-// homepage 2 containers, van flex row naar flex column op mobiel
-// alle afleveringen waarin een karakter speelt onder / naast het karakter mappen
-// filter op naam van epi en char om de data met een query te ontvangen?
-// 2 paginas, vanuit allebei kan je zoeken. zet op die pagina zelf een knop die obv de state string een fetch doet.
-
 export default function Index() {
 
   const [episodes, setEpisodes] = useState([]);
@@ -35,7 +24,6 @@ export default function Index() {
     .then(response => {
       if (!response.ok) {
         throw Error('De server ligt er momenteel uit');}
-        ;
         return response.json();
     })
     .then(data => {
@@ -43,17 +31,15 @@ export default function Index() {
       let items = [];
       let x;
       for(x in results) {
-        items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })
-      }
+      items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })}
       setEpisodes([...items]);})
       .catch((err) => console.log(err))
     
-     // character autocomplete fetch
-      fetch('https://rickandmortyapi.com/api/character')
+    // character autocomplete fetch
+    fetch('https://rickandmortyapi.com/api/character')
       .then(response => {
         if (!response.ok) {
           throw Error('De server ligt er momenteel uit');}
-          ;
           return response.json();
       })
       .then(data => {
@@ -64,12 +50,9 @@ export default function Index() {
           items.push({id: results[x].id, name: results[x].name})
         }
         setCharacters([...items]);})
-        .catch((err) => console.log(err))
-    
-    }, []);
+        .catch((err) => console.log(err))}, []);
 
     // reset all
-
     const resetAll = () => {
       setEpisode([]);
       setCharacter([]);
@@ -77,23 +60,22 @@ export default function Index() {
     }
 
     // autocomplete handlers
-
     const handleOnSearch = (string, results) => {
       setInputString(string);
-      console.log(string, results)
+      console.log(string, results);
     }
   
     const handleOnHover = (result) => {
-      console.log(result)
+      console.log(result);
     }
   
     const handleOnSelect = (item) => {
       setInputString(item.name);
-      console.log(item)
+      console.log(item);
     }
   
     const handleOnFocus = () => {
-      console.log('Focused')
+      console.log('Focused');
     }
   
     const formatResult = (item) => {
@@ -101,45 +83,49 @@ export default function Index() {
     }
 
     //charfetch
-
     const charFetch = () => {
-      fetch(`https://rickandmortyapi.com/api/character/?name=${inputString}`)
-    .then(response => {
-      if (!response.ok) {
-        throw Error('De server ligt er momenteel uit');}
-        ;
-        return response.json();
-    })
-    .then(data => {
-      const results = data.results;
-      let items = [];
-  
-        items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origin: results[0].origin.name, image: results[0].image, episode: results[0].episode})
-        setCharacter([...items]);
-        document.querySelector('input').value = '';
-      console.log(items)})
-      .catch((err) => console.log(err))
-    }
+      if(!inputString) {
+        alert('Make sure to fill in the field first');
+      }
+      else {
+        fetch(`https://rickandmortyapi.com/api/character/?name=${inputString}`)
+        .then(response => {
+          if (!response.ok) {
+            throw Error('De server ligt er momenteel uit');}
+            return response.json();
+        })
+        .then(data => {
+          const results = data.results;
+          let items = [];
+          items.push({id: results[0].id, name: results[0].name, species: results[0].species, gender: results[0].gender, origin: results[0].origin.name, image: results[0].image, episode: results[0].episode})
+          setCharacter([...items]);
+            document.querySelector('input').value = '';
+            console.log(items)})
+          .catch((err) => console.log(err))
+        }
+      }
 
     //epifetch
-
     const epiFetch = () => {
-      fetch(`https://rickandmortyapi.com/api/episode/?name=${inputString}`)
-    .then(response => {
-      if (!response.ok) {
-        throw Error('De server ligt er momenteel uit');}
-        ;
-        return response.json();
-    })
-    .then(data => {
-      const results = data.results;
-      let items = [];
-        items.push({id: results[0].id, name: results[0].name, episode: results[0].episode, air_date: results[0].air_date, characters: results[0].characters });
-        setEpisode([...items]);
-        document.querySelector('input').value = '';
-      console.log(items)})
-      .catch((err) => console.log(err))
-     
+      if(!inputString) {
+        alert('Make sure to fill in the field first');
+      }
+      else {
+        fetch(`https://rickandmortyapi.com/api/episode/?name=${inputString}`)
+        .then(response => {
+          if (!response.ok) {
+            throw Error('De server ligt er momenteel uit');}
+            return response.json();
+        })
+        .then(data => {
+          const results = data.results;
+          let items = [];
+            items.push({id: results[0].id, name: results[0].name, episode: results[0].episode, air_date: results[0].air_date, characters: results[0].characters });
+            setEpisode([...items]);
+            document.querySelector('input').value = '';
+          console.log(items)})
+          .catch((err) => console.log(err))
+      }
     }
 
   return (
@@ -149,7 +135,7 @@ export default function Index() {
       <Route 
       path="/episodes" 
       element={<Episode 
-        epiFetch={epiFetch}
+      epiFetch={epiFetch}
       episodes={episodes} 
       episode={episode}
       handleOnSearch={handleOnSearch} 
@@ -157,11 +143,10 @@ export default function Index() {
       handleOnSelect={handleOnSelect} 
       handleOnFocus={handleOnFocus} 
       formatResult={formatResult}/>} />
-
       <Route 
       path="/characters" 
       element={<Character 
-        charFetch={charFetch}
+      charFetch={charFetch}
       characters={characters} 
       character={character}
       handleOnSearch={handleOnSearch} 
@@ -169,17 +154,15 @@ export default function Index() {
       handleOnSelect={handleOnSelect} 
       handleOnFocus={handleOnFocus} 
       formatResult={formatResult}/>} />
-      
       <Route exact path="/" element={
       <Home 
       resetAll={resetAll}
       />} />
-        
       </Routes>
       </div>
     </Router>
   );
-}//
+}
 
 ReactDOM.render(
   <React.StrictMode>
