@@ -5,7 +5,6 @@
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   background-color: #282c34;
-  color: white;
 }
 
 .homeHeader {
@@ -53,13 +52,13 @@ header {
 }
 
 .animations {
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-evenly;
   grid-row: 2 / 5;
   grid-column: 2 / 3;
   height: 100%;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 .button {
@@ -70,7 +69,7 @@ header {
   font-weight: bold;
   text-shadow: 1px 1px 1px black;
   color: var(--portalColor);
-  padding: 5px;
+  padding: 6px;
   border-radius: 15px;
   box-shadow: 
   inset 0 0 0.5em 0 var(--portalColor),
@@ -89,7 +88,7 @@ header {
 }
 
 .portalRick {
-  display:flex;
+  display: flex;
   align-items: center;
   height: 80%;
   width: 100%;
@@ -152,11 +151,11 @@ header {
     transform: translateX(-2em);
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.7;
     transform: translateX(-2em);
   }
   65% {
-    opacity: 0.8;
+    opacity: 1;
     transform: translateX(-2em);
   }
   100% {
@@ -176,4 +175,3 @@ header {
     grid-row: 3 / 5;
   }
 }
-

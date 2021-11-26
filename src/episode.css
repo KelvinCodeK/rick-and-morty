@@ -13,20 +13,22 @@ h2 {
     text-align: center;
     margin: 1em;
 }
+
 h3 {
     font-size: calc(7px + 2.5vmin);
     text-align: center;
     margin: 0;
 }
+
 p {
     font-size: calc(8px + 1.35vmin);
     text-align: center;
 }
+
 .episodeHeader {
     background-image: url('./images/show.png');
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .zoeken {

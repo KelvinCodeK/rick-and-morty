@@ -1,1 +1,0 @@
-Bedankt voor de opdracht! 
