@@ -9,7 +9,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import BrowserRouter from 'react-browser-router';
 
 export default function Index() {
 
@@ -166,8 +165,8 @@ export default function Index() {
 }
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <React.StrictMode>
     <Index />
-  </BrowserRouter>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
