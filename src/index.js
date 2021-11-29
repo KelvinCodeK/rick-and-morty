@@ -27,30 +27,73 @@ export default function Index() {
         return response.json();
     })
     .then(data => {
-      const results = data.results;
+      const count = data.info.count;
+      let charFetchString = '';
+      let charFetchURL = 'https://rickandmortyapi.com/api/episode/';
+      for(let i = 1; i < count + 1; i++) {
+        if(i === count) {
+          charFetchString = charFetchString + i;
+        }
+        else{
+          charFetchString = charFetchString + i + ',';
+        }
+      }
+      console.log(charFetchURL + charFetchString);
+      return charFetchURL + charFetchString})
+      .then(url => { 
+        fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw Error('De server ligt er momenteel uit');}
+            return response.json();
+        })
+    .then(data => {
       let items = [];
       let x;
-      for(x in results) {
-      items.push({id: results[x].id, name: results[x].name, episode: results[x].episode })}
+      for(x in data) {
+      items.push({id: data[x].id, name: data[x].name, episode: data[x].episode })}
       setEpisodes([...items]);})
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err))});
     
     // character autocomplete fetch
+    // initial fetch for count
     fetch('https://rickandmortyapi.com/api/character')
-      .then(response => {
-        if (!response.ok) {
-          throw Error('De server ligt er momenteel uit');}
-          return response.json();
-      })
-      .then(data => {
-        const results = data.results;
-        let items = [];
-        let x;
-        for(x in results) {
-          items.push({id: results[x].id, name: results[x].name})
+    .then(response => {
+      if (!response.ok) {
+        throw Error('De server ligt er momenteel uit');}
+        return response.json();
+    })
+    .then(data => {
+      const count = data.info.count;
+      let charFetchString = '';
+      let charFetchURL = 'https://rickandmortyapi.com/api/character/';
+      for(let i = 1; i < count + 1; i++) {
+        if(i === count) {
+          charFetchString = charFetchString + i;
         }
-        setCharacters([...items]);})
-        .catch((err) => console.log(err))}, []);
+        else{
+          charFetchString = charFetchString + i + ',';
+        }
+      }
+      console.log(charFetchURL + charFetchString);
+      return charFetchURL + charFetchString})
+      .then(url => { 
+        fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw Error('De server ligt er momenteel uit');}
+            return response.json();
+        })
+        .then(data => {
+          let items = [];
+          let x;
+          for(x in data) {
+            items.push({id: data[x].id, name: data[x].name})
+          }
+          console.log(items);
+          setCharacters([...items]);})
+          .catch((err) => console.log(err))});
+      }, []);
 
     // reset all
     const resetAll = () => {
